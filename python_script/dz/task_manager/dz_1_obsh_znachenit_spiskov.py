@@ -10,7 +10,6 @@ def same_lists_elements_check(first_list, second_list):
             if i == j:
                 c.append(i)
             break
-
 return c
 
 
