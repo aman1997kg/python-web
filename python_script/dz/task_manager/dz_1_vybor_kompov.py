@@ -8,17 +8,13 @@ hdd = int(input())
 hdd_type = str(input())
 price = int(input())
 condition = int(input())
+
 if 8 >= ram >= 4:
-    if hdd_type == 'ssd' and hdd < 256 or  hdd_type == 'hdd' and hdd > 1024:
-        if price < 1000:
-            if condition == 1:
-                print(True)
-            else:
-                print(False)
+    if hdd_type == 'ssd' and hdd <= 256 or  hdd_type == 'hdd':
+        print(True)
+    else:
+        print(False)
+elif hdd >= 1024 and price >= 1000 and condition == 1:
+        print(True)
 else:
     print(False)
-    '''
-if hdd_type == 'ssd' and hdd < 256 or  hdd_type == 'hdd' and hdd > 1024:
-    print(True)
-else:
-    print(False)'''
