@@ -3,7 +3,6 @@
 
 '''
 
-
 def find_max_and_min_digits(a,b,c):
     if a > b:
         if a > c:

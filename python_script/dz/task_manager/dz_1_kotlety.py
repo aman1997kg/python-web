@@ -14,4 +14,4 @@ def cutlet_check(k, m, n):
     else:
       t = m*(1+(n*2 // k))
     print(t)
-cutlet_check(5, 5, 2)
+print(cutlet_check(5, 5, 2))

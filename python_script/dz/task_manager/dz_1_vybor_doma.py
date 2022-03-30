@@ -3,6 +3,7 @@
 '''Функция должна возвращать TRUE или FALSE в зависимости от вводимых данных. Вы должны правильно соблюсти все условия выбора.
 Условные выражения
 '''
+
 def choose_house(district, material, area, price):
     if district == "байтик" or district  == "ортосай" or  district == "чон-арык":
         if material == "кирпич" and  area  <= 4 and price <= 50000 :
@@ -12,20 +13,10 @@ def choose_house(district, material, area, price):
         else:
             return False
 
-district = str(input())
+'''
 material = str(input())
 area = int(input())
 price = int(input())
-
-print(choose_house(district, material, area, price))
-
-
-
-'''
-district = "чон-арык"
-material = "Кирпич" 
-area = 4 
-price = 50000 
 
 if district == "Байтик" or district  == "Орто сай" or  district == "чон-арык":
     if material == 'Кирпич' and  area  <= 4 and price <= 50000 :

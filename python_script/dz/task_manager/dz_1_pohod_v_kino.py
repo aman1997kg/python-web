@@ -11,7 +11,6 @@ def func(genre: str, time: int, price: float):
             return False 
     else:
         return False
-
 '''
 
 genre = str(input())
