@@ -19,6 +19,6 @@ from statistics import mean
 test_list = [0,2,3,4,8,6,7,8,10]
 
 print(test_list[0])
-test =len(test_list)/3 
+test =len(test_list)/2 
 print(test_list[-1])
 print(test)
