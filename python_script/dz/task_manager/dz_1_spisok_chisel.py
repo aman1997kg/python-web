@@ -32,11 +32,10 @@ print(get_first_midd_last_list_elements(test_list))
 import math
 def get_first_midd_last_list_elements(test_list):
     first = test_list[0]
-    midd_c = math.ceil(len(test_list)/2)
-    midd = test_list.index(midd_c)
+    midd_c = len(test_list)
+    midd = int(midd_c/2)
     last = test_list[-1]
     list_t = [first, test_list[midd], last]
-     #return list_t
     print(list_t)
 test_list = [1,2,3,4,7,6,7,8,9]
 get_first_midd_last_list_elements(test_list)
