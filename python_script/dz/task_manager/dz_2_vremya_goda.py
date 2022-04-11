@@ -1,6 +1,4 @@
-months = ['8'] #['1','2','3','4','5','6','7','8','9','10','11','12']
-#months = dict()
-
+months = ['1','2','3','4','5','6','7','8','9','10','11','12']
 
 spring = dict()
 summer = dict()
@@ -25,11 +23,11 @@ winter['2'] = 'Февраль'
 
 
 for month in months:
-    if month == spring:
+    if month in spring:
         print('Весна')
-    elif month == summer:
-        print('Весна')
-    elif month == autumn:
-        print('Осень')
-    elif month == winter:
-        print('Зима')
+    elif month in summer:
+            print('Лето')
+            if month in autumn:
+                print('Осень')
+                if month in winter:
+                    print('Зима')
