@@ -17,6 +17,10 @@ class Time:
     def __check_format(cls, value):
         return str(value).rjust(2, '0')
 
+
+
+    #  __add__  Дандер методу
+
     def __add__(self, other):
         if not isinstance(other, (int, Time)):
             raise ArithmeticError('Сан он жактагы оперант болушу керек!')
@@ -32,6 +36,7 @@ class Time:
         return self + other
 
 
+    #  __sub__  Дандер методу
     def __sub__(self, other):
         if not isinstance(other, (int, Time)):
             raise ArithmeticError('Сан он жактагы оперант болушу керек!')
@@ -49,6 +54,7 @@ class Time:
         return self - other
 
 
+    #  __mul__  Дандер методу
     def __mul__(self, other):
         if not isinstance(other, (int, Time)):
             raise ArithmeticError('Сан он жактагы оперант болушу керек!')
@@ -65,7 +71,7 @@ class Time:
     def __imul__(self, other):
         return self * other
 
-
+    #  __truediv__  Дандер методу
     def __truediv__(self, other):
         if not isinstance(other, (int, Time)):
             raise ArithmeticError('Сан он жактагы оперант болушу керек!')
@@ -137,9 +143,11 @@ class Length:
     def __init__(self, *args):
         self.__number = args
 
+    #  __len__  Дандер методу
     def __len__(self):
         return len(self.__number)
 
+    #  __abs__  Дандер методу
     def __abs__(self):
         return list(map(abs, self.__number))
 
@@ -155,9 +163,11 @@ class Person:
     def __init__(self, name):
         self.name = name
 
+    #  __str__  Дандер методу
     def __str__(self):
         return self.name
 
+    #  __repr__  Дандер методу
     def __repr__(self):
         return self.name
 
@@ -170,6 +180,7 @@ class Decorator:
     def __init__(self, func):
         self.__fn = func
 
+    #  __call__  Дандер методу
     def __call__(self, f = 1, *args, **kwargs):
         print(self.__fn())
         return self.__fn(f)
@@ -195,5 +206,31 @@ class Simvol:
 # text = Simvol(' !/? .:;"')
 # res = text('  !Hello.!: Привет/')
 # print(res)
+
+
+
+
+
+
+
+
+class Integer:
+    def __init__(self):
+        self.__number = 0
+
+    def __call__(self, *args, **kwargs):
+        # print('__call__ - иштеп жатат')
+        self.__number += 1
+        print(f"__call__ чакырылды жана эсеп - {self.__number} болду")
+        return self.__number
+
+# num = Integer()
+#
+# num() # Функтор
+# num() # Функтор
+# num() # Функтор
+
+
+
 
 
