@@ -51,8 +51,8 @@ class Abonent:
 
      @classmethod
      def display_info(self):
-          return ("ФИО: ", str(self.full_name)), ("номер:", str(self.id_number)), ("номер кредитной карточки", str(self.card_number))
-print(Abonent.display_info())
+          return ("ФИО: ", str(self.full_name)), ("номер:", str(self.id_number)), ("номер кредитной карточки", str(self.card_numbe)
+
 
 
     def time(self):
