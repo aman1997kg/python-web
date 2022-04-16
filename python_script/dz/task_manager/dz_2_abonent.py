@@ -64,7 +64,7 @@ class Abonent:
 
 
     @classmethod
-    def get_overuser(cls):
+    def get_overuser(cls, ):
         all_obj_list = []
         user1 = Abonent("1", "Aman Bolotbek uulu", "Naryn", "41587978897", "5235324", "5457948273", "10:15")
         user2 = Abonent("2", "Bolotbek uulu Erkin", "Naryn", "43234224234", "43424243", "433423432", "11:10")
