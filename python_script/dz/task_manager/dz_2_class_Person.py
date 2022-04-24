@@ -26,7 +26,7 @@ class Person:
 
 
     def __str__(self):
-        return self.full_name, self.age, self.address
+        print(self.full_name, self.age, self.address)
 
 
 person = Person('Aman Bolotbek uulu', '25', 'Amanbekov 8')
