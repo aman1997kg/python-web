@@ -24,24 +24,20 @@ for b in banknot:
                     bankomat.append(key)
 print(bankomat)
 '''
-
 def get_current(amount):
-   
+
     bankomat = []
 
-    banknot = {5000: 0, 2000: 0, 1000: 0, 500: 0, 200: 0, 100: 0, 50: 0, 20: 0, 10: 0, 5: 0, 3: 0, 1: 0}
+    amount = 4009
+    b = [5000, 2000, 1000, 500, 200, 100, 50, 20, 10, 5, 3, 1]
 
-    for b in banknot:
-        if amount == 0:
-            break
-        while b  > 0 and amount >= b:
-            banknot[b] - 1
-            banknot[b] += 1
-            amount -= b
-            if amount == 0:
-                for key, value in banknot.items():
-                    if value > 0:
-                        bankomat.append(key)
-    return bankomat
 
-print(get_current(10111))
+
+
+print(get_current(9009))
+
+
+
+
+
+
