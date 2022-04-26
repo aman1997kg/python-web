@@ -5,7 +5,7 @@ def separate_numbers(numbers_list):
     neg = []
 
     for i in numbers_list:
-        if i > 0:
+        if i >= 0:
             pos.append(i)
         elif i < 0:
             neg.append(i)
@@ -16,7 +16,7 @@ print(separate_numbers(numbers_list))
 '''
 
 def separate_numbers(numbers_list):
-    pos = [pos for pos in numbers_list if pos > 0]
+    pos = [pos for pos in numbers_list if pos >= 0]
     neg = [neg for neg in numbers_list if neg < 0]
     return pos, neg
 

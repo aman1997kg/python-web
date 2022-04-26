@@ -25,10 +25,6 @@ def get_first_midd_last_list_elements(test_list):
     #return list_t 
     print(test_list.index(midd))
 
-test_list = [1,2,3,4,5,6,7,8,9]
-print(get_first_midd_last_list_elements(test_list))
-'''
-
 import math
 def get_first_midd_last_list_elements(test_list):
     first = test_list[0]
@@ -39,3 +35,4 @@ def get_first_midd_last_list_elements(test_list):
     print(list_t)
 test_list = [1,2,3,4,7,6,7,8,9]
 get_first_midd_last_list_elements(test_list)
+
