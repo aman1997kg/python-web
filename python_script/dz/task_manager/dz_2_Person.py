@@ -24,17 +24,15 @@ class Person:
     def move(self, value):
         self.address = value
 
-
     def __str__(self):
-        print(self.full_name, self.age, self.address)
+        return f'{self.full_name}, {self.age}, {self.address}'
 
 
-person = Person('Aman Bolotbek uulu', '25', 'Amanbekov 8')
+
+
+
+person = Person("Aman", 25, "Amanbekov №8")
 print(person.talk())
-person.move('at-bashy')
-print(person.__str__())
-
-
-
-
-
+person.move("Amanbekov Melisbek №8")
+print(str(person))
+# print(person.__dict__)
