@@ -1,18 +1,47 @@
-""" Создайте класс Person с атрибутами: имя(name) и возраст(age)
- строки типа. Создайте метод display(),
- который отображает имя и возраст объекта,
-  созданного с помощью класса Person.
-  Создайте дочерний класс Student, который наследуется от класса Person
-  и также имеет атрибут раздела (название, которое нужно применить department).
-  Создайте метод displayStudent(), который отображает имя, возраст и раздел объекта,
-  созданного с помощью класса Student.
-  Создайте объект Student через создание экземпляра в классе Student,
-   а затем протестируйте метод displayStudent"""
+""" Создайте класс Person с атрибутами:
+имя и возраст (name, age).
+
+Создайте метод display(), который отображает имя и возраст объекта,
+созданного с помощью класса Person.
+
+Создайте дочерний класс Student,
+который наследуется от класса Person и также имеет атрибут раздела (department).
+
+Создайте метод displayStudent(),
+который отображает имя, возраст и раздел объекта,
+созданного с помощью класса Student.
+
+Создайте объект Student через создание экземпляра в классе Student,
+а затем протестируйте метод displayStudent
+
+
+                                                        # пишите код внизу
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def display(self):
+        # return self.name, self.age
+        print(f'{self.__name} {self.age}')
+
+
+class Student(Person):
+
+    def __init__(self, name, age, department):
+        super().__init__(name, age)
+        self.department = department
+
+
+    def displayStudent(self):
+        print(f'{self.name} {self.age} {self.department}')
+        # return self.name, self.age, self.department
+"""
 
 class Person:
     def __init__(self, name, age):
-        self.__name = name
-        self.age = age
+        self.__name = str(name)
+        self.age = str(age)
 
     @property
     def name(self):
@@ -20,7 +49,7 @@ class Person:
 
     def display(self):
         # return self.name, self.age
-        print(f'{self.name} {self.age}')
+        print(f'{self.__name} {self.age}')
 
 
 class Student(Person):
@@ -32,16 +61,16 @@ class Student(Person):
 
     def displayStudent(self):
         print(f'{self.name} {self.age} {self.department}')
-        # return self.name, self.aige, self.department
+        # return self.name, self.age, self.department
 
 person = Person('Aman', 25)
 person.display()
-print(person.__dict__)
+# print(person.__dict__)
 
 
 student = Student('Azamat', 25, 'IT_Technology')
 student.displayStudent()
-print(student.__dict__)
+# print(student.__dict__)
 
 
 
