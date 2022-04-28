@@ -11,6 +11,30 @@ class Vehicle:
 
     def seating_capacity(self, capacity):
         return f"The seating capacity of a {self.name} is {capacity} passengers"
+        
+        ###################################################################################
+        
+                                        # пишите код внизу
+
+class Vehicle:
+
+    def __init__(self, name, max_speed, mileage):
+        self.name = name
+        self.max_speed = max_speed
+        self.mileage = mileage
+
+
+    def seating_capacity(self, capacity=50):
+        return f'The seating capacity of a {self.name} is {capacity} passengers'
+
+
+
+class Bus(Vehicle):
+
+    def seating_capacity(self, capacity=50):
+        return f'The seating capacity of a {self.name} is {capacity} passengers'
+
+    
 '''
 
 class Vehicle:
@@ -19,17 +43,15 @@ class Vehicle:
         self.max_speed = max_speed
         self.mileage = mileage
 
-    def seating_capacity(self, capacity):
+    def seating_capacity(self, capacity=50):
         return f'The seating capacity of a {self.name} is {capacity} passengers'
 
 
 
 class Bus(Vehicle):
-    capacity = 50
 
-    # def __init__(self, name, max_speed, mileage):
-    #     super(Bus, self).__init__(name, max_speed, mileage)
-    def seating_capacity(self, capacity):
+
+    def seating_capacity(self, capacity=50):
         return f'The seating capacity of a {self.name} is {capacity} passengers'
 
     

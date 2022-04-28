@@ -10,13 +10,16 @@
 
 new_dict = {}
 
-dict_one = {'color': 'blue',  'green',  'yellow'}
-dict_two = {'weight': '12', 'weight': '2','weight': '333'}
-dict_three = {'price': '100', 'price': '130','price': '130'}
-
-a_dict = (dict_one, dict_two, dict_three)
-
-def get_dict(dict_one, dict_two, dict_three):
+dict_one = {'color': 'blue'}
+dict_two = {'weight': '12'}
+dict_three = {'price': '100'}
+# a_dict = (dict_one, dict_two, dict_three)
 
 
-print(get_dict(dict_one, dict_two, dict_three))
+
+
+
+
+
+
+
