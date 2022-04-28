@@ -18,8 +18,6 @@ class List:
         return self.new_list
 
 
-
-
     def search_by_name(self, *name):
         for i in name:
             self.return_list_name.append(i.title())
@@ -28,14 +26,14 @@ class List:
 
         for a in set_name_list:
             self.new_list.append(a)
-        # print(self.new_list)
+        print(self.new_list)
         return f'{self.new_list}'
 
 
 class ContactList(List):
 
-    def __init__(self):
-        super().__init__()
+    def search_by_name(self, *name):
+        for i in name:
 
 
 
@@ -44,6 +42,6 @@ class ContactList(List):
 
 
 my_contacts = ContactList()
-my_contacts.search_by_name("Anan","algan","salgan","Banan", "anan", "Algan")
+my_contacts.search_by_name("anan", "algan", "salgan", "banan", "anan", "algan", "algan")
 
-print(my_contacts.new_list)
+print(my_contacts.search_by_name())
