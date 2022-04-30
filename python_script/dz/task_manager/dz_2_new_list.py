@@ -34,12 +34,8 @@ class ContactList(List):
 
     def search_by_name(self, *name):
         for i in name:
-
-
-
-
-
-
+            if self == name:
+                return name
 
 my_contacts = ContactList()
 my_contacts.search_by_name("anan", "algan", "salgan", "banan", "anan", "algan", "algan")
