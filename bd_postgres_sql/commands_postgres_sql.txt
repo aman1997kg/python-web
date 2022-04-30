@@ -1,0 +1,21 @@
+ sudo -u postgres psql          ----->     # вход на БД
+\l                              ----->	   # вывод шаблонов БД
+ sudo -u postgres psql		-----> 	   # создание  бд
+\? 				----->     # спарвка hepl
+\h 				----->     # справка помощь
+CREATE USER aman040997 WITH PASSWORD '040997'; #создание роли логин пароль
+\du 				----->     #покажет какие роли есть в бд
+ALTER ROLE aman040997 SET client_encoding TO 'utf8';
+ALTER ROLE aman040997 SET default_transaction_isolation  TO 'read committed';
+ALTER ROLE aman040997 SET timezone TO 'UTC';
+GRANT ALL PRIVILEGES ON DATABASE person TO aman040997; #дать привелигии и доступы
+psql -U aman040997 -h localhost -d person   # Подключение созданному бд
+ 
+
+#### Создание таблиц бд
+person=> CREATE TABLE "user"(
+person(> id SERIAL PRIMARY KEY,
+person(> name VARCHAR(50),
+person(> age INT);
+CREATE TABLE
+
