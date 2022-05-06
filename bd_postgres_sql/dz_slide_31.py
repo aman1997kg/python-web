@@ -116,9 +116,10 @@ cur = conn.cursor()
 #cur.execute(" ")
 
     #33. Напишите запрос, который соединяет таблицы глобус народный и выводит совпадения количества продуктов. 
+#cur.execute("SELECT globus.product_name AS Globus, globus.product_amount,  narodnii.product_name AS Narodnii, narodnii.product_amount FROM globus INNER JOIN narodnii ON globus.product_amount = narodnii.product_amount;")
+
+    #34. Напишите запрос, который выводит продукты глобуса, где название заканчивается на a, b, c, d, e, f, g, a
 #cur.execute(" ")
-
-
 
 
 

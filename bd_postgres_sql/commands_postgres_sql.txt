@@ -160,7 +160,7 @@ ________________________________________________________________________________
 # Напишите запрос, который выводит id из колонки пользователей и имя из колонки clients 
 	person=> SELECT user_id, login FROM users;
 
-#
+# 
 
 
 
@@ -221,7 +221,10 @@ SELECT globus.product_name, globus.date_delivered, narodnii.product_name, narodn
 SELECT globus.product_name AS Globus, narodnii.product_name AS Narodnii FROM globus FULL JOIN narodnii ON globus.product_id = narodnii.product_id; 
 
 	# Напишите запрос, который соединяет таблицы глобус народный и выводит совпадения количества продуктов.  
- 
+SELECT globus.product_name AS Globus, globus.product_amount,  narodnii.product_name AS Narodnii, narodnii.product_amount FROM globus INNER JOIN narodnii ON globus.product_amount = narodnii.product_amount;
+
+	#Напишите запрос, который выводит продукты глобуса,где название заканчивается на a, b, c, d, e, f, g, a
+
 
 
 
