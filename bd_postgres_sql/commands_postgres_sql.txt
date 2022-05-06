@@ -1,21 +1,229 @@
- sudo -u postgres psql          ----->     # вход на БД
-\l                              ----->	   # вывод шаблонов БД
- sudo -u postgres psql		-----> 	   # создание  бд
-\? 				----->     # спарвка hepl
-\h 				----->     # справка помощь
+ sudo -u postgres psql  ----->   # postgrest башкы базага кирүү 
+\l                      ----->   # түзүлгөн базаларды көрсөт
+\? 			----->   # hepl жардам
+\h 			----->   # справка помощь
+
+
+CREATE DATABASE user;  -----> 	# создание нового база данных 
+				# жаңы база түзүү
+\l ---------->   # түзүлгөн базаны көргөзөт
+
+
 CREATE USER aman040997 WITH PASSWORD '040997'; #создание роли логин пароль
 \du 				----->     #покажет какие роли есть в бд
+
 ALTER ROLE aman040997 SET client_encoding TO 'utf8';
 ALTER ROLE aman040997 SET default_transaction_isolation  TO 'read committed';
 ALTER ROLE aman040997 SET timezone TO 'UTC';
+
 GRANT ALL PRIVILEGES ON DATABASE person TO aman040997; #дать привелигии и доступы
+
 psql -U aman040997 -h localhost -d person   # Подключение созданному бд
  
 
-#### Создание таблиц бд
+#### Создание таблиц бд ----> # базада таблица түзүү
 person=> CREATE TABLE "user"(
 person(> id SERIAL PRIMARY KEY,
 person(> name VARCHAR(50),
 person(> age INT);
 CREATE TABLE
+
+\d  ------> проверка какие таблицы есть 
+    ------> Кандай таблицалар бар экенин билүү
+\d users ----> #тандалган таблицанын жөнүндө кенен маалымат алуу
+
+INSERT INTO users(name,phone) VALUES ('Aman', 25); 
+----> Таблицага маалымат киргизүү
+
+SELECT * FROM users; --------> # Таблицага кирген маалыматтарды көрүү окуу
+
+users=> UPDATE users SET phone=0700119997  WHERE id=1;
+------> # Туура эмес кирген маалыматтарды жаңыртуу өзгөртүү
+
+
+------> # Удаление данных по id
+users=> DELETE FROM users WHERE id=5; 
+------> # Таблицадан id боюнча өчүрүү
+
+
+------> # Таблица дагы бир столбец ячейка кошуу
+users=> ALTER TABLE users ADD COLUMN age VARCHAR(3);
+------> Добавление нового колонок
+
+
+------> # Таблицадагы колонканы алып салуу өчүрүү
+users=> ALTER TABLE outter_flight DROP COLUMN example;
+
+
+-----> # Вывести строки где id больше  10
+users=> SELECT * FROM inner_flight WHERE id > 10;
+
+
+
+-----> # Выведите все строк где страна прилета Ош и Бишкек. 
+users=> SELECT * FROM inner_flight WHERE to_destionation = 'Ош' OR to_destionation = 'Бишкек';
+
+
+-----> # Изменение данные из колонки quantity все 60 на 150.
+users=> UPDATE inner_flight SET quantity=150 WHERE quantity=60;
+
+
+------> # Вывести все строки где quantity больше 140.
+users=> SELECT * FROM inner_flight WHERE quantity > 140;
+
+
+------> # Переназначить все из neighbors на 10
+users=> UPDATE outter_flight SET neighbors=10 WHERE id > 1;
+------> # таблицадагы баардык neighbors сапчасын 10 менен толукта
+
+
+------> # Выведите только имена компании занимающий "Пассажирской" 
+users=> SELECT company FROM outter_flight WHERE flight_type = 'Пассажирский';
+  company  
+-----------
+ air manas
+ air manas
+ Pegasus
+(3 строки)
+
+
+-------> # Выведите только имена компании занимающий "Грузом" 
+
+users=> SELECT company FROM outter_flight WHERE flight_type = 'Грузовой';
+  company  
+-----------
+ air manas
+ air manas
+ air manas
+ air manas
+(4 строки)
+
+
+----------> # Выведите все строки где id меньше 7
+users=> SELECT * FROM outter_flight WHERE id > 7;
+
+
+---------> # Выведите сторки где neighbors больше 6. 
+users=> SELECT * FROM outter_flight WHERE neighbors > 6;
+
+
+--------> # Таблицадан компаниянын атын жана учуп бара жаткан мам атын чыгар 
+users=> SELECT company, to_country FROM outter_flight;
+
+
+--------> # Вывод из два разных таблицах
+users=> SELECT users.name, outter_flight.to_country FROM users, outter_flight;
+
+
+--------> # сортировка по возрасту возрастанию. 
+users=> SELECT * FROM users ORDER BY age DESC;
+
+
+-------> # таблицадагы саптардын баарын эсептөө жана алардын орточо эсебин чыгаруу 
+users=> SELECT COUNT(*), AVG(phone) FROM users;
+
+
+-------> # Группалоо, Группировнаие
+users=> SELECT COUNT(*), AVG(phone) FROM users GROUP BY name HAVING AVG(phone) >5;
+
+-------> #
+
+
+
+
+
+
+
+
+
+
+
+
+_________________________________________________________________________________________________
+---------------------------------> dz_slide_31_<-------------------------------------------------
+
+# вывести followers по id=1
+	person=> SELECT followers FROM users WHERE user_id=1;
+
+# Сколько followerОВ у самого знаменитого пользователя 
+	person=> SELECT MAX(followers) FROM users;
+ 
+# Найдите среднее количество подписчиков 
+	person=> SELECT AVG(followers) FROM users;
+
+# Просортируйте всех пользователей по стране 	
+	person=> SELECT country FROM users ORDER BY country;
+
+# Отсортируйте всех пользователей по email
+	person=> SELECT * FROM users ORDER BY email;
+
+# Напишите запрос, который выводит id из колонки пользователей и имя из колонки clients 
+	person=> SELECT user_id, login FROM users;
+
+#
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------
+					Market, globus, narodnii
+
+
+	# Посчитайте в каком магазине больше сникерсов в globus или narodnii
+
+person=> SELECT (SELECT product_name FROM  globus WHERE product_name ILIKE '%Snikers%' LIMIT 1), COUNT(product_name) AS globus,(SELECT COUNT(product_name) AS narodnii FROM narodnii WHERE product_name ILIKE '%Snikers%') FROM  globus WHERE product_name ILIKE '%Snikers%';
+
+
+ product_name | globus | narodnii 
+--------------+--------+----------
+ Snikers      |      2 |        8
+(1 строка)
+
+
+	# Выбрать столбцы и строки, которые пересекаются в двух таблицах можно таким образом:
+SELECT column1, column2, column3, column4 FROM table1
+intersect
+SELECT column1, column2, column3, column4 FROM table2
+
+
+	
+	# Посмотрите продукты в globus и narodnii у которых product_type равен сроку годности продукта.
+SELECT product_name, product_type_id, day_to_expire FROM globus INTERSECT SELECT product_name, product_type_id, day_to_expire FROM narodnii;
+SELECT product_type_id, day_to_expire FROM globus INTERSECT SELECT product_type_id, day_to_expire FROM narodnii;
+
+
+ 
+	# Посмотрите продукты из globus и narodnii у которых одинаковый срок годности.
+SELECT product_name, day_to_expire FROM globus INTERSECT SELECT product_name, day_to_expire FROM narodnii;
+
+
+	# Через Python подключитесь к БД main и узнайте сколько ВСЕГО piyaz в магазине globus. 
+SELECT COUNT(*) FROM globus WHERE product_name ILIKE '%piyaz%';
+ 
+
+	# Через Python удалите из магазина narodnii все продукты у которых срок годности
+	
+	# Если ПРОДУКТ и СРОК ГОДНОСТИ продукта одинаковы в globus и narodnii удалите эту запись из globus. 
+
+	# Напишите запрос, который выводит всю информацию продукта из народного, где количество продуктов 200 < продукт < 1001
+#cur.execute("SELECT * FROM narodnii WHERE 200 < product_amount OR product_amount > 1001;")
+
+	# Напишите запрос, который соединяет таблицы глобус народный и выводит day delivered 
+SELECT product_name, date_delivered FROM globus UNION ALL SELECT product_name, date_delivered FROM narodnii;
+
+SELECT globus.product_name, globus.date_delivered, narodnii.product_name, narodnii.date_delivered FROM globus FULL JOIN narodnii ON globus.product_id = narodnii.product_id;
+ 
+	#  Напишите запрос, который соединяет таблицы глобус народный по столбцу глобуса и выводит название продукта 
+SELECT globus.product_name AS Globus, narodnii.product_name AS Narodnii FROM globus FULL JOIN narodnii ON globus.product_id = narodnii.product_id; 
+
+	# Напишите запрос, который соединяет таблицы глобус народный и выводит совпадения количества продуктов.  
+ 
+
+
+
+
 
