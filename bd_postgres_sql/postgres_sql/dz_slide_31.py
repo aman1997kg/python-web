@@ -119,7 +119,13 @@ cur = conn.cursor()
 #cur.execute("SELECT globus.product_name AS Globus, globus.product_amount,  narodnii.product_name AS Narodnii, narodnii.product_amount FROM globus INNER JOIN narodnii ON globus.product_amount = narodnii.product_amount;")
 
     #34. Напишите запрос, который выводит продукты глобуса, где название заканчивается на a, b, c, d, e, f, g, a
+#cur.execute("SELECT product_name AS globus_products FROM globus WHERE (product_name ILIKE '%a') OR (product_name ILIKE '%b') OR (product_name ILIKE '%c') OR (product_name ILIKE '%d') OR (product_name ILIKE '%e') OR (product_name ILIKE '%f') OR (product_name ILIKE '%g') OR (product_name ILIKE '%a');")
+
+    #35. Cоздайте таблицу sizes которая хранит в себе размер ноги,уникальный id записи и время создание записи. 
 #cur.execute(" ")
+
+
+    #36. Создайте вторую таблицу которая хранит в себе id из таблицы sizes и имя человека с помощью INNER JOIN выведите на экран Имя человека и размер его обуви.
 
 
 

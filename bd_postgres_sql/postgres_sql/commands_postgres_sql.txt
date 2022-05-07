@@ -223,10 +223,31 @@ SELECT globus.product_name AS Globus, narodnii.product_name AS Narodnii FROM glo
 	# Напишите запрос, который соединяет таблицы глобус народный и выводит совпадения количества продуктов.  
 SELECT globus.product_name AS Globus, globus.product_amount,  narodnii.product_name AS Narodnii, narodnii.product_amount FROM globus INNER JOIN narodnii ON globus.product_amount = narodnii.product_amount;
 
-	#Напишите запрос, который выводит продукты глобуса,где название заканчивается на a, b, c, d, e, f, g, a
+	# Напишите запрос, который выводит продукты глобуса,где название заканчивается на a, b, c, d, e, f, g, a
+SELECT product_name AS globus_products FROM globus WHERE (product_name ILIKE '%a') OR (product_name ILIKE '%b') OR (product_name ILIKE '%c') OR (product_name ILIKE '%d') OR (product_name ILIKE '%e') OR (product_name ILIKE '%f') OR (product_name ILIKE '%g') OR (product_name ILIKE '%a');
+
+
+	# Cоздайте таблицу sizes которая хранит в себе размер ноги,уникальный id записи и время создание записи.  
+person=> CREATE TABLE sizes(
+person(> id SERIAL PRIMARY KEY,
+person(> size_leg INT,
+person(> create_time TIMESTAMP DEFAULT LOCALTIMESTAMP);
+CREATE TABLE
+
+person=> INSERT INTO sizes(size_leg) VALUES (41);
+INSERT 0 1
+
+
+	#Создайте вторую таблицу которая хранит в себе id из таблицы sizes и имя человека с помощью INNER JOIN
+	# выведите на экран Имя человека и размер его обуви.
+person=> CREATE TABLE usr(
+person(> sizes_id INT,
+person(> owner VARCHAR(20),
+person(> FOREIGN KEY (sizes_id) REFERENCES sizes(id));
+CREATE TABLE
 
 
 
-
+#SELECT id, owner, size_leg FROM usr, sizes;
 
 
