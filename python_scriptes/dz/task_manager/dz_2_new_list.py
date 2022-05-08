@@ -14,10 +14,6 @@ class List:
         self.return_list_name = []
         self.new_list = []
 
-    def __str__(self):
-        return self.new_list
-
-
     def search_by_name(self, *name):
         for i in name:
             self.return_list_name.append(i.title())
@@ -26,18 +22,25 @@ class List:
 
         for a in set_name_list:
             self.new_list.append(a)
-        print(self.new_list)
-        return f'{self.new_list}'
+        return self.new_list
+
 
 
 class ContactList(List):
+    all_list = []
+    all_list3 = []
 
     def search_by_name(self, *name):
         for i in name:
-            if self == name:
-                return name
+            if name == self:
+                print('ok')
+            else:
+                print('no')
+
+
+
 
 my_contacts = ContactList()
-my_contacts.search_by_name("anan", "algan", "salgan", "banan", "anan", "algan", "algan")
+my_contacts.search_by_name("1", "2", "3", "4", "1", "2", "5")
 
 print(my_contacts.search_by_name())

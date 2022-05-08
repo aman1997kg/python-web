@@ -38,48 +38,16 @@ class Abonent:
          return f'{self.full_name} {self.card_number} {self.id_number}'
 
 
-    def get_overused()
+
+     def get_overused(self):
+         pass
+
+
+     
+
 
 abonent = Abonent(1, "Aman Bolotbek uulu", '8-mart', 145665465, 1456465, 165465, 4)
 
 print(abonent.display_info())
-
-
-     # def time(self):
-     #     if self.call_time == 'Нет':
-     #        return self.call_time
-     #     str_date = self.call_time.split(":")
-     #     str_date = str_date[0]
-     #     return int(str_date)
-     #
-     #
-     # @classmethod
-     # def get_overuser(cls):
-     #    all_obj_list = []
-     #    user1 = Abonent("1", "Aman Bolotbek uulu", "Naryn", "41587978897", "5235324", "5457948273", "10:15")
-     #    user2 = Abonent("2", "Bolotbek uulu Erkin", "Naryn", "43234224234", "43424243", "433423432", "11:10")
-     #
-     #    all_obj_list.append(user1)
-     #    all_obj_list.append(user2)
-     #
-     #    for user in all_obj_list:
-     #        try:
-     #            user_time  = user.time()
-     #            if user_time == "Нет":
-     #                pass
-     #            elif 0 < user_time <= 15:
-     #                new_list = user.display_info()
-     #                new_user_list = []
-     #                new_user_list.append(new_list)
-     #                return new_user_list
-     #                print(new_user_list)
-     #        except:
-     #            print("\nПользователь указал время не правильно!")
-
-
-
-
-     # def sort_abo(cls, ):
-     #    pass
 
 
