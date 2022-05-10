@@ -23,7 +23,7 @@ with db:
     )
     '''
 
-    #'''
+    '''
     data = [
         {'from_region':'Bishkek',
         'to_destionation':'Naryn',
@@ -37,7 +37,7 @@ with db:
     ]
 
     Inner_flights.insert_many(data).execute()
-    #'''
+    '''
 
     #Вывод данных из БД
 
@@ -132,7 +132,6 @@ with db:
         print(
             o_f.company,
         )
-        
     '''
 
     #

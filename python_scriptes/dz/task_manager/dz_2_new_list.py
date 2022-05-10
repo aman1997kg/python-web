@@ -23,24 +23,19 @@ class List:
         for a in set_name_list:
             self.new_list.append(a)
         return self.new_list
-
+        print(self.new_list)
 
 
 class ContactList(List):
-    all_list = []
-    all_list3 = []
-
     def search_by_name(self, *name):
         for i in name:
-            if name == self:
-                print('ok')
-            else:
-                print('no')
+
+
 
 
 
 
 my_contacts = ContactList()
-my_contacts.search_by_name("1", "2", "3", "4", "1", "2", "5")
+my_contacts.search_by_name("Asan", "Aman", "aman", "asan", "altyn", "jarkyn", "Salamat")
 
 print(my_contacts.search_by_name())
