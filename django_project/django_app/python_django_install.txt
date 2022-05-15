@@ -1,0 +1,411 @@
+Установка Python: Debian или Ubuntu
+Введи эту команду в консоль:
+
+$ sudo apt install python3
+
+Виртуальное окружение
+$ python3 -m venv myvenv
+
+
+Твой первый проект на Django!
+django-admin startproject mysite .
+
+Точка . крайне важна, потому что говорит скрипту установить
+Django в вашем текущем каталоге (который и обозначается сокращённо точкой .)
+
+Изменяем настройки:
+mysite/settings.py
+TIME_ZONE = 'Asia/Bishkek'
+
+LANGUAGE_CODE = 'ru-ru'
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '0.0.0.0']
+
+Настройка базы данных:
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
+Cоздать базу данных для нашего блога,
+набери в командной строке следующее: python manage.py migrate
+
+
+Запуск веб-сервера:
+$ python manage.py runserver
+
+$ python manage.py runserver 0:8000 -----> еслм порт занят напишите другую свободную порт
+
+
+
+Модели Django
+Модель в Django — это объект определённого свойства: он хранится в базе данных.
+База данных представляет собой совокупность различных данных.
+
+
+Создание приложения:
+$ python manage.py startapp blog
+
+
+После того, как приложение создано, нам нужно сообщить Django,
+что теперь он должен его использовать.
+
+mysite/settings.py
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'blog',
+]
+
+
+Создание модели записи в блоге:
+
+blog/models.py
+from django.conf import settings
+from django.db import models
+from django.utils import timezone
+
+
+class Post(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    published_date = models.DateTimeField(blank=True, null=True)
+
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
+
+    def __str__(self):
+        return self.title
+
+        ----------------------------------------------------------------------------------------------
+
+class Post(models.Model): — эта строка определяет нашу модель (объект).
+
+class — это специальное ключевое слово для определения объектов.
+Post — это имя нашей модели, мы можем поменять его при желании (специальные знаки и пробелы использовать нельзя). Всегда начинай имена классов с прописной буквы.
+models.Model означает, что объект Post является моделью Django, так Django поймет, что он должен сохранить его в базу данных.
+Дальше мы задаем свойства, о которых уже говорили: title, text, created_date, published_date и author. Чтобы это сделать, нам нужно определиться с типом полей (это текст? число? дата? ссылка на другой объект? например, на пользователя?).
+
+models.CharField — так мы определяем текстовое поле с ограничением на количество символов.
+models.TextField — так определяется поле для неограниченно длинного текста. Выглядит подходящим для содержимого поста, верно?
+models.DateTimeField — дата и время.
+models.ForeignKey — ссылка на другую модель.
+
+
+Создаём таблицы моделей в базе данных:
+$ python manage.py makemigrations blog
+
+$ python manage.py migrate blog
+
+---------------------------------------------------------------------------------------------------------
+
+            Администрирование Django:
+
+Чтобы добавлять, редактировать и удалять записи, для которых мы только что создали модель,
+мы используем панель управления администратора Django.
+
+blog/admin.py
+        from django.contrib import admin
+        from .models import Post
+
+        admin.site.register(Post)
+
+
+Создать суперпользователя (англ. superuser):
+$ python manage.py createsuperuser
+
+------------------------------------------------------------------------------------------------------------
+Git — это «система управления версиями», используемая множеством программистов.
+Эта программа отслеживает изменения, происходящие с файлами, чтобы впоследствии
+можно было восстановить состояние кода на нужный момент времени.
+
+
+Установка Git:
+$ sudo apt install git
+
+
+Создаём Git-репозиторий:
+
+$ git init
+Initialized empty Git repository in ~/djangogirls/.git/
+$ git config --global user.name "Your Name"
+$ git config --global user.email you@example.com
+
+
+Git будет отслеживать изменения всех файлов и каталогов в заданной директории,
+ однако некоторые из них мы предпочли бы игнорировать.
+
+ \.gitignore\
+            *.pyc
+            *~
+            __pycache__
+            myvenv
+            db.sqlite3
+            /static
+            .DS_Store
+
+Используй команду git status перед git add или в любой другой момент,
+когда ты не уверена, что изменения — хорошая идея.
+
+$ git status
+On branch master
+
+$ git add --all .
+$ git commit -m "My Django Girls app, first commit"
+
+
+Теперь нужно связать локальный репозиторий с репозиторием на GitHub.:
+$ git remote add origin https://github.com/<your-github-username>/my-first-blog.git
+$ git push -u origin master
+
+------------------------------------------------------------------------------------------------------
+Настройка блога на PythonAnywhere:
+PythonAnywhere — это сервис по запуску кода на Python в облаке.
+Мы будем использовать его, чтобы разместить наш сайт «вживую» в интернете.
+
+www.pythonanywhere.com
+
+PythonAnywhere, нужно загрузить
+на PythonAnywhere твой код с Github:
+
+PythonAnywhere command-line ---- console site pythonanywhere
+$ pip3.6 install --user pythonanywhere
+
+$ pa_autoconfigure_django.py https://github.com/<your-github-username>/my-first-blog.git
+
+PythonAnywhere command-line
+(ola.pythonanywhere.com) $ python manage.py createsuperuser
+
+Введи параметры для своего пользователя-админа.
+
+-----------------------------------------------------------------
+
+Как URL-адреса работают в Django?
+
+
+mysite/urls.py
+"""mysite URL Configuration
+
+[...]
+"""
+from django.contrib import admin
+from django.urls import path
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+]
+
+Мы также хотим сохранить файл mysite/urls.py
+в максимально аккуратном виде,
+так что мы импортируем URL-адреса для нашего приложения blog в mysite/urls.py.
+
+mysite/urls.py
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('blog.urls')),
+]
+
+blog/views.py
+from django.shortcuts import render
+def post_list(request):
+    return render(request, 'blog/post_list.html', {})
+
+    --------------------------------------------------------------------------------
+    Django ORM и QuerySet
+
+    Интерактивная консоль Django^
+   $ python manage.py shell
+
+--------------------------------------------------------------------------
+
+   from django.shortcuts import render
+
+def post_list(request):
+    return render(request, 'blog/post_list.html', {})
+
+
+from django.shortcuts import render
+from django.utils import timezone
+from .models import Post
+
+def post_list(request):
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    return render(request, 'blog/post_list.html', {'posts': posts})
+
+-------------------------------------------------------------------------------------
+
+ Отображаем шаблон списка записей^ :
+
+ <div>
+    <h1><a href="/">Django Girls Blog</a></h1>
+</div>
+
+{% for post in posts %}
+    <div>
+        <p>published: {{ post.published_date }}</p>
+        <h1><a href="">{{ post.title }}</a></h1>
+        <p>{{ post.text|linebreaksbr }}</p>
+    </div>
+{% endfor %}
+
+
+
+Статические файлы в Django:
+создав папку static
+
+---------------------------------
+blog/templates/blog/post_list.html
+{% load static %}
+----------------------------------
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+
+---------------------------------------------
+Создаём базовый шаблон:
+Давай создадим файл base.html в директории blog/templates/blog/:
+
+{% extends 'blog/base.html' %}
+-----------------------------------
+{% block content %}
+{% endblock %}
+--------------------------------------
+
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+            <h1><a href="">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+
+Создадим в шаблоне ссылку на страницу поста
+ссылку с заголовка поста в списке на страницу с подробной информацией
+<h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+
+-------------------------------------------------------------
+ blog/urls.py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.post_list, name='post_list'),
+    path('post/<int:pk>/', views.post_detail, name='post_detail'),
+]
+----------------------------------------------------
+
+Формы в Django
+
+----------------------------------------------------
+blog/forms.py
+from django import forms
+
+from .models import Post
+
+class PostForm(forms.ModelForm):
+
+    class Meta:
+        model = Post
+        fields = ('title', 'text',)
+-----------------------------------------------------------
+Ссылка на страницу с формой
+<a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+------------------------------------------------------------------
+blog/urls.py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.post_list, name='post_list'),
+    path('post/<int:pk>/', views.post_detail, name='post_detail'),
+    path('post/new/', views.post_new, name='post_new'),
+]
+
+---------------------------------------------------------------------
+
+def post_new(request):
+    form = PostForm()
+    return render(request, 'blog/post_edit.html', {'form': form})
+
+--------------------------------------------------------------------------------
+
+blog/views.py
+def post_new(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = PostForm()
+    return render(request, 'blog/post_edit.html', {'form': form})
+
+--------------------------------------------------------------------
+
+Форма редактирования
+
+<a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+
+blog/templates/blog/post_detail.html
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <div class="post">
+        {% if post.published_date %}
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+        {% endif %}
+        <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.text|linebreaksbr }}</p>
+    </div>
+{% endblock %}
+
+-----------------------------------------------------
+
+В файле blog/urls.py добавь:
+
+blog/urls.py
+    path('post/<int:pk>/edit/', views.post_edit, name='post_edit'),
+
+------------------------------------------------------------
+
+blog/views.py
+def post_edit(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'blog/post_edit.html', {'form': form})
+
+
